@@ -8,13 +8,13 @@ using namespace std;
 bool check_char(char paren, Stack* s);
 
 int main(int argc, char **argv){
-vector<bool> check(argc-1);
 cout << "Checking the parentheses in argv arguments\n";
 
 for(int i = 1; i < argc; i++)
     {
      Stack* s = new Stack;
      bool this_str = false;
+     bool too_many_open = false;
      for(int j=0;j<strlen(argv[i]);j++)
      {
          bool char_flag = check_char(argv[i][j], s);
@@ -25,15 +25,12 @@ for(int i = 1; i < argc; i++)
          else if ( char_flag) {if (!s->get_size()){this_str=true;}}
          else {cout<<"No Condition met\n"; break;}
      }
-     if (this_str) check[i-1] = true; 
-     else if (!this_str) check[i-1] = false;
+     if (this_str) cout << "argv " << i << " correct\n"; 
+     else if (!this_str && s->get_size()) cout << "argv " << i << " incorrect: too many open parenthesis\n";
+     else if (!this_str) cout << "argv " << i << " incorrect\n";
      delete s;
     }
 
-    for (int i = 0; i < argc-1 ; i++)
-    {if (check[i]) cout << "argv " << i+1 << " correct\n";
-     else cout << "argv " << i+1 << " incorrect\n";}
-    
    return 0;
 }
 
