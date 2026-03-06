@@ -19,7 +19,7 @@ void Stack::push(char x){
   if(new_node){new_node->set_next(top);
                 top = new_node;  
                 size ++;  
-                cout << "Pushed " << x << endl;
+
               } 
   else{top = new_node; new_node->set_next(NULL); size++;}
 }
@@ -34,7 +34,6 @@ char Stack::pop(){
         value=t->get_value();
         top = t->get_next();
 
-        cout << "value = " << value;
         delete t;
         size--;
         return value;
